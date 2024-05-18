@@ -7,15 +7,16 @@ import time
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from esp8266.esp8266 import esp8266
 
-class tcpClient:
+DNS_SERVER1 = "8.8.8.8" # DNS SERVER1
+DNS_SERVER2 = "8.8.4.4" # DNS SERVER2
+
+class sntpClient:
 
 	def __init__(self, device, speed, timeout, debug=False):
 		self.wifi = esp8266(device, speed, timeout, debug)
 		self.debug = debug
 
-	def connect(self, host, port):
-		self.host = host
-		self.port = port
+	def connect(self, host, timezone):
 		_ret = self.wifi.sendCommand("ATE0", "OK\r\n")
 		if (_ret is None):
 			print("ATE0 esp8266 not respond")
@@ -25,7 +26,11 @@ class tcpClient:
 			print("AT+RST esp8266 not respond")
 			return None
 
-		_command = "AT+CIPSTART=\"TCP\",\"{}\",{}".format(host, port)
+		_ret = self.wifi.setDNS(DNS_SERVER1, DNS_SERVER2)
+		if (self.debug): print("_ret=[{}]".format(_ret))
+
+		_command = 'AT+CIPSNTPCFG=1,{},\"{}\"'.format(timezone, host)
+		if (self.debug): print("_command=[{}]".format(_command))
 		_ret = self.wifi.sendCommand(_command, "OK\r\n")
 		if (self.debug): print("_ret=[{}]".format(_ret))
 		if _ret is None:
@@ -34,33 +39,35 @@ class tcpClient:
 		_ret = _ret.replace('\r\n', ' ')
 		_ret = _ret.replace('OK', '')
 		_ret = _ret.replace('"', '')
-		if (self.debug): print("_ret=[{}]".format(_ret))
 		_ret = _ret.rstrip()
 		if (self.debug): print("_ret=[{}]".format(_ret))
 		_ret = _ret.split(",")
 		if (self.debug): print("_ret=[{}]".format(_ret))
-		if (_ret[1] != "{}".format(host)):
+		if (_ret[1] != "{}".format(timezone)):
 			print("{} retuned {}".format(host, _ret[1]))
 			return False
-		if (_ret[2] != "{} CONNECT".format(port)):
+		if (_ret[2] != "{}".format(host)):
 			print("{} retuned {}".format(host, _ret[2]))
 			return False
+		
 		return True
 
-	def send(self, data, size):
-		_ret = self.wifi.sendData(data, size, None, 0)
-		if (self.debug): print("_ret=[{}]".format(_ret))
-		if (_ret is "OK"): return True
-		return False
+	def getTime(self):
+		for _i in range(3):
+			_ret = self.wifi.sendCommand("AT+CIPSNTPTIME?", "OK\r\n")
+			if (self.debug): print("_ret=[{}]".format(_ret))
+			_ret = _ret.replace('\r\n', ' ')
+			_ret = _ret.replace('OK', '')
+			if (self.debug): print("_ret=[{}]".format(_ret))
+			_ret = _ret.rstrip()
+			if (self.debug): print("_ret=[{}]".format(_ret))
 
-	def receive(self):
-		_ret = self.wifi.receiveData()
-		if (self.debug): print("_ret=[{}]".format(_ret))
-		if (_ret is None): return [False, 0]
-		return [True, _ret]
+			_index = _ret.find(':')
+			if (self.debug): print("_index=[{}]".format(_index))
+			if (_index == -1): break
+			_time = _ret[_index+1:]
+			if (self.debug): print("_time=[{}]".format(_time))
+			if (_time != 'Thu Jan 01 00:00:00 1970'): return _time
+			time.sleep(1)
 
-	def disconnect(self):
-		_ret = self.wifi.sendCommand("AT+CIPCLOSE", "OK\r\n")
-		if (self.debug): print("_ret=[{}]".format(_ret))
-		if (_ret is None): return False
-		return True
+		return None
