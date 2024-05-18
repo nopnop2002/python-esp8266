@@ -28,10 +28,10 @@ I used the Flash download tool.
 See [here](https://github.com/nopnop2002/Arduino-ESPAT-TCP/tree/master/Flash_AT_firmware).   
 
 # Setup ESP01 using terminal software such as CoolTerm.   
-GPIO2 must be pulled up.   
-GPIO0 must be pulled up.   
-CH_PD must be pulled up.   
-RESET must be pulled up.   
+- GPIO2 must be pulled up.   
+- GPIO0 must be pulled up.   
+- CH_PD must be pulled up.   
+- RESET must be pulled up.   
 
 ![esp01-setup](https://user-images.githubusercontent.com/6020549/33159150-bdade984-d053-11e7-9b93-bbbf05573441.jpg)
 
