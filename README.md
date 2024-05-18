@@ -239,7 +239,7 @@ usb0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 Now you can ping the RNDIS client and use ssh and scp.
 ```
 $ ping 173.32.0.93
-PING 73.32.0.93 (73.32.0.93) 56(84) バイトのデータ
+PING 173.32.0.93 (192.168.10.45) 56(84) bytes of data.
 64 bytes from 192.168.10.45: icmp_seq=1 ttl=64 time=0.607 ms
 64 bytes from 192.168.10.45: icmp_seq=2 ttl=64 time=0.365 ms
 64 bytes from 192.168.10.45: icmp_seq=3 ttl=64 time=0.268 ms
