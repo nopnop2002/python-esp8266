@@ -17,10 +17,10 @@ ESP8266 module like ESP01
 # Flash AT firmware to ESP01.   
 The 3.3V output of the UART-USB converter has too little current to be used.   
 Power is supplied using 5V from the UART-USB converter and 3.3V from the regulator.   
-GPIO2 must be pulled up.   
-GPIO0 must be connected to GND.   
-CH_PD must be pulled up.   
-RESET must be pulled up.   
+- GPIO2 must be pulled up.   
+- GPIO0 must be connected to GND.   
+- CH_PD must be pulled up.   
+- RESET must be pulled up.   
 
 ![esp01-flash](https://user-images.githubusercontent.com/6020549/33159146-b8456238-d053-11e7-8202-a86cca2f8a3d.jpg)
 
