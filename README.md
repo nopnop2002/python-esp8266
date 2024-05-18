@@ -153,27 +153,16 @@ OK
 
 (*1) It is necessary to be able to supply sufficient current.
 
-# How to use in Ubuntu/Debian environment   
+# Retrieving files from github   
+
+### Get files using git   
+In environments where networking is supported, use git to retrieve the files.   
 ```
 git clone https://github.com/nopnop2002/python-esp8266
-cd python-esp8266/connectWiFi
-
-# Know your UART device   
-ls /dev/tty*
-/dev/tty  /dev/ttyFIQ0  /dev/ttyS3  /dev/ttyS4
-
-# Root privileges are required on Ubuntu/Debian
-sudo -E python3 main.py --device /dev/ttyS3
-
-device=/dev/ttyS3
-speed=115200
-debug=False
-ip=['192.168.10.108', '192.168.10.1', '192.168.10.1']
-mac=5c:cf:7f:6b:00:1b
 ```
 
-# Transfer file using RNDIS functionality   
-In a environment that does not have a network support, files are transferred using the RNDIS function.   
+### Get files using RNDIS   
+In environments where networking is not supported, use RNDIS to retrieve the files.   
 Ubuntu 20.04/Debian 11 is required as the RNDIS server.   
 In the Ubuntu 22.04/Debian 12 environment, the usb0 interface has been changed to a "consistent network device naming method".   
 
@@ -251,6 +240,24 @@ rtt min/avg/max/mdev = 0.268/0.403/0.607/0.124 ms
 
 $ scp -r python-esp8266 root@172.32.0.93:/root
 root@172.32.0.93's password:
+```
+
+# How to use in Ubuntu/Debian environment   
+```
+cd python-esp8266/connectWiFi
+
+# Know your UART device   
+ls /dev/tty*
+/dev/tty  /dev/ttyFIQ0  /dev/ttyS3  /dev/ttyS4
+
+# Root privileges are required on Ubuntu/Debian
+sudo -E python3 main.py --device /dev/ttyS3
+
+device=/dev/ttyS3
+speed=115200
+debug=False
+ip=['192.168.10.108', '192.168.10.1', '192.168.10.1']
+mac=5c:cf:7f:6b:00:1b
 ```
 
 # How to use in buildroot environment   
