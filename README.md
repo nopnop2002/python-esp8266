@@ -135,19 +135,19 @@ Bin version(Wroom 02):1.7.5
 OK
 ```
 
-# Connect ESP01 to HOST
+# Connect ESP01 to HOST   
+- ESP01(Tx)  - UART-RX port of host   
+- ESP01(Rx)  - UART-TX port of host   
+- ESP01(Gnd) - Gnd of host   
+- ESP01(3v3) - 3V3 of host   
 
-ESP01(Tx)  - UART-RX port of host   
-ESP01(Rx)  - UART-TX port of host   
-ESP01(Gnd) - Gnd of host
-ESP01(3v3) - 3V3 of host
 
 # How to use
 ```
 git clone https://github.com/nopnop2002/python-esp8266
 cd python-esp8266/connectWiFi
 
-# Know your UART device
+Know your UART device   
 ls /dev/tty*
 /dev/tty  /dev/ttyFIQ0  /dev/ttyS3  /dev/ttyS4
 
