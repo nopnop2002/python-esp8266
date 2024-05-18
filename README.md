@@ -139,8 +139,9 @@ OK
 - ESP01(Tx)  - UART-RX port of host   
 - ESP01(Rx)  - UART-TX port of host   
 - ESP01(Gnd) - Gnd of host   
-- ESP01(3v3) - 3V3 of host   
+- ESP01(3v3) - 3V3 of host(*1)   
 
+(*1) It is necessary to be able to supply sufficient current.
 
 # How to use
 ```
