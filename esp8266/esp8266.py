@@ -47,7 +47,7 @@ class esp8266:
 		#if (self.debug): print("_return={}".format(_return))
 		return _return
 
-	def sendData(self, data, size, host, port, encode=True):
+	def sendData(self, data, size, host, port):
 		if (host is not None):
 			_command = "AT+CIPSEND={},\"{}\",{}".format(size, host, port)
 		else:
@@ -92,10 +92,7 @@ class esp8266:
 			if (ch == ">"): break
 
 		for _i in range(size):
-			if (encode):
-				self.ser.write(str.encode(data[_i]))
-			else:
-				self.ser.write(data[_i])
+			self.ser.write(str.encode(data[_i]))
 
 		_wait = list("SEND OK\r\n")
 		_waitlen = len(_wait) * -1
@@ -119,7 +116,7 @@ class esp8266:
 
 		return "OK"
 
-	def receiveData(self):
+	def receiveData(self, decode=True):
 		_wait = list("IPD,")
 		_waitlen = len(_wait) * -1
 		_received = []
@@ -167,14 +164,15 @@ class esp8266:
 			if (len(ch) == 0): 
 				print("sendCommand: timeout")
 				return None
-			try:
+			if (decode):
 				ch = ch.decode('utf-8')
-			except:
-				continue
 			_received.append(ch)
 			if (self.debug): print("_recieved={}".format(_received))
 
-		_return = "".join(_received)
+		if (decode):
+			_return = "".join(_received)
+		else:
+			_return = _received
 		if (self.debug): print("_return={}".format(_return))
 		return _return
 
