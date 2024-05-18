@@ -9,6 +9,8 @@ ESP8266 module like ESP01
 
 # Software requirements   
 - pysirail library   
+In your buildroot environment you can enable it with this.   
+![buildroot-71](https://github.com/nopnop2002/python-esp8266/assets/6020549/2b3be767-83e3-4d4c-8d28-93303196fca2)
 
 - ESP8266 AT Firmware   
  You can download from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
