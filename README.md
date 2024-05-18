@@ -153,7 +153,7 @@ OK
 
 (*1) It is necessary to be able to supply sufficient current.
 
-# How to use in an environment with network support   
+# How to use in Ubuntu/Debian environment   
 ```
 git clone https://github.com/nopnop2002/python-esp8266
 cd python-esp8266/connectWiFi
@@ -173,7 +173,7 @@ mac=5c:cf:7f:6b:00:1b
 ```
 
 # Transfer file using RNDIS functionality   
-In a environment that does not have a network supports, files are transferred using the RNDIS function.   
+In a environment that does not have a network support, files are transferred using the RNDIS function.   
 Ubuntu 20.04/Debian 11 is required as the RNDIS server.   
 In the Ubuntu 22.04/Debian 12 environment, the usb0 interface has been changed to a "consistent network device naming method".   
 
