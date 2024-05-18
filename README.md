@@ -153,7 +153,7 @@ OK
 
 (*1) It is necessary to be able to supply sufficient current.
 
-# How to use
+# How to use in Debian/Ubuntu environment   
 ```
 git clone https://github.com/nopnop2002/python-esp8266
 cd python-esp8266/connectWiFi
@@ -164,6 +164,102 @@ ls /dev/tty*
 
 # Root privileges are required on Ubuntu/Debian
 sudo -E python3 main.py --device /dev/ttyS3
+
+device=/dev/ttyS3
+speed=115200
+debug=False
+ip=['192.168.10.108', '192.168.10.1', '192.168.10.1']
+mac=5c:cf:7f:6b:00:1b
+```
+
+# Transfer file using RNDIS functionality   
+In a buildroot environment that does not have a network function, files are transferred using the RNDIS function.   
+Ubuntu 20.04/Debian 11 is required as the RNDIS server.   
+In the Ubuntu 22.04/Debian 12 environment, the usb0 interface has been changed to a "consistent network device naming method".   
+
+Clone to RNDIS server.
+```
+git clone https://github.com/nopnop2002/python-esp8266
+```
+
+When power is supplied to the RNDIS client from the Ubuntu/Dibian machine, the USB0 interface will be displayed on the Ubuntu/Debian side as shown below.   
+```
+$ sudo ifconfig usb0
+usb0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::a742:1ab5:c616:d016  prefixlen 64  scopeid 0x20<link>
+        ether 7a:da:62:7c:d5:bb  txqueuelen 1000  (Ethernet)
+        RX packets 21  bytes 2169 (2.1 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 39  bytes 8001 (8.0 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+$ nmcli conn show
+NAME        UUID                                  TYPE      DEVICE
+Wired connection 2  ea035181-2f58-3f41-bf2b-89c5022bb4e0  ethernet  usb0
+Wired connection 1  5bfff474-56e9-3a46-81d7-3b3a7d5692d7  ethernet  enp4s0
+```
+
+Assign a fixed IP address to usb0 interface using the nmcli command.
+The fixed IP address assigned to the Ubuntu/Debian side can be any as long as it is in the same segment as the RNDIS client board.
+```
+$ sudo nmcli connection down "Wired connection 2"
+$ sudo nmcli connection modify "Wired connection 2" ipv4.addresses "172.32.0.100/16"
+$ sudo nmcli connection modify "Wired connection 2" ipv4.method manual
+$ sudo nmcli connection up "Wired connection 2"
+$ nmcli device show usb0
+GENERAL.DEVICE:                         usb0
+GENERAL.TYPE:                           ethernet
+GENERAL.HWADDR:                         DA:1F:7F:84:10:69
+GENERAL.MTU:                            1500
+GENERAL.STATE:                          100 (connected)
+GENERAL.CONNECTION:                     Wired connection 2
+GENERAL.CON-PATH:                       /org/freedesktop/NetworkManager/ActiveConnection/6
+WIRED-PROPERTIES.CARRIER:               オン
+IP4.ADDRESS[1]:                         172.32.0.100/16
+IP4.GATEWAY:                            --
+IP4.ROUTE[1]:                           dst = 172.32.0.0/16, nh = 0.0.0.0, mt = 101
+IP6.ADDRESS[1]:                         fe80::f220:3c47:db11:8fbe/64
+IP6.GATEWAY:                            --
+IP6.ROUTE[1]:                           dst = fe80::/64, nh = ::, mt = 101
+```
+
+Check the result with ifconfig.
+```
+$ sudo ifconfig usb0
+usb0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.32.0.100  netmask 255.255.0.0  broadcast 172.32.255.255
+        inet6 fe80::f220:3c47:db11:8fbe  prefixlen 64  scopeid 0x20<link>
+        ether da:1f:7f:84:10:69  txqueuelen 1000  (Ethernet)
+        RX packets 53  bytes 7107 (7.1 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 109  bytes 19284 (19.2 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+Now you can ping the RNDIS client and use ssh and scp.
+```
+$ ping 173.32.0.93
+PING 73.32.0.93 (73.32.0.93) 56(84) バイトのデータ
+64 bytes from 192.168.10.45: icmp_seq=1 ttl=64 time=0.607 ms
+64 bytes from 192.168.10.45: icmp_seq=2 ttl=64 time=0.365 ms
+64 bytes from 192.168.10.45: icmp_seq=3 ttl=64 time=0.268 ms
+64 bytes from 192.168.10.45: icmp_seq=4 ttl=64 time=0.373 ms
+^C
+--- 173.32.0.93 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3059ms
+rtt min/avg/max/mdev = 0.268/0.403/0.607/0.124 ms
+
+$ scp -r python-esp8266 root@172.32.0.93:/root
+root@172.32.0.93's password:
+```
+
+# How to use in buildroot environment   
+```
+cd python-esp8266/connectWiFi
+
+# Know your UART device   
+ls /dev/tty*
+/dev/tty  /dev/ttyFIQ0  /dev/ttyS3  /dev/ttyS4
 
 # buildroot does not require root privileges
 python3 main.py --device /dev/ttyS3
