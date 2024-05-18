@@ -55,6 +55,8 @@ class esp8266:
 		if (self.debug): print("_command=[{}]".format(_command))
 		_command = _command + "\r\n"
 		self.ser.flushInput()
+		#wk = str.encode(_command)
+		#print(type(wk))
 		self.ser.write(str.encode(_command))
 
 		_wait = list("OK\r\n")
@@ -240,30 +242,4 @@ class esp8266:
 		if (len(_dns) == 2): return _dns[1]
 		if (len(_dns) == 3): return [_dns[1], _dns[2]]
 		if (len(_dns) == 4): return [_dns[1], _dns[2], _dns[3]]
-		return None
-
-	def setSntpServer(self, server, timezone):
-		_command = 'AT+CIPSNTPCFG=1,{},\"{}\"'.format(timezone, server)
-		if (self.debug): print("_command=[{}]".format(_command))
-		_ret = self.sendCommand(_command, "OK\r\n")
-		if (self.debug): print("_ret=[{}]".format(_ret))
-
-	def getSntpTime(self):
-		for _i in range(3):
-			_ret = self.sendCommand("AT+CIPSNTPTIME?", "OK\r\n")
-			if (self.debug): print("_ret=[{}]".format(_ret))
-			_ret = _ret.replace('\r\n', ' ')
-			_ret = _ret.replace('OK', '')
-			if (self.debug): print("_ret=[{}]".format(_ret))
-			_ret = _ret.rstrip()
-			if (self.debug): print("_ret=[{}]".format(_ret))
-
-			_index = _ret.find(':')
-			if (self.debug): print("_index=[{}]".format(_index))
-			if (_index == -1): break
-			_time = _ret[_index+1:]
-			if (self.debug): print("_time=[{}]".format(_time))
-			if (_time != 'Thu Jan 01 00:00:00 1970'): return _time
-			time.sleep(1)
-
 		return None
