@@ -5,10 +5,6 @@ import os
 import argparse
 from sntpClient import sntpClient
 
-DNS_SERVER1 = "8.8.8.8" # DNS SERVER1
-DNS_SERVER2 = "8.8.4.4" # DNS SERVER2
-TIME_SERVER = "time.google.com" # SNTP Server
-
 if __name__=="__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--device', help="uart device file name", default='/dev/tty')

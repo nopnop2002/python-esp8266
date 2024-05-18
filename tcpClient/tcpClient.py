@@ -16,35 +16,31 @@ class tcpClient:
 	def connect(self, host, port):
 		self.host = host
 		self.port = port
-		_ret = self.wifi.sendCommand("ATE0", "OK\r\n")
-		if (_ret is None):
-			print("ATE0 esp8266 not respond")
-			return None
+
+		# Reset module
 		_ret = self.wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
 		if (_ret is None):
 			print("AT+RST esp8266 not respond")
 			return None
 
+		# Local echo off
+		_ret = self.wifi.sendCommand("ATE0", "OK\r\n")
+		if (_ret is None):
+			print("ATE0 esp8266 not respond")
+			return None
+
+		# Establish TCP transmission
 		_command = "AT+CIPSTART=\"TCP\",\"{}\",{}".format(host, port)
 		_ret = self.wifi.sendCommand(_command, "OK\r\n")
 		if (self.debug): print("_ret=[{}]".format(_ret))
 		if _ret is None:
 			print("{} not respond".format(host))
 			return False
-		_ret = _ret.replace('\r\n', ' ')
+		_ret = _ret.replace('\r\n', '')
 		_ret = _ret.replace('OK', '')
-		_ret = _ret.replace('"', '')
+		_ret = _ret.replace(' ', '')
 		if (self.debug): print("_ret=[{}]".format(_ret))
-		_ret = _ret.rstrip()
-		if (self.debug): print("_ret=[{}]".format(_ret))
-		_ret = _ret.split(",")
-		if (self.debug): print("_ret=[{}]".format(_ret))
-		if (_ret[1] != "{}".format(host)):
-			print("{} retuned {}".format(host, _ret[1]))
-			return False
-		if (_ret[2] != "{} CONNECT".format(port)):
-			print("{} retuned {}".format(host, _ret[2]))
-			return False
+		if (_ret != "CONNECT"): return False
 		return True
 
 	def send(self, data, size):

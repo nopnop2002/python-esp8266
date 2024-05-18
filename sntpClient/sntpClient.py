@@ -17,18 +17,26 @@ class sntpClient:
 		self.debug = debug
 
 	def connect(self, host, timezone):
-		_ret = self.wifi.sendCommand("ATE0", "OK\r\n")
-		if (_ret is None):
-			print("ATE0 esp8266 not respond")
-			return None
+		self.host = host
+		self.timezone = timezone
+
+		# Reset module
 		_ret = self.wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
 		if (_ret is None):
 			print("AT+RST esp8266 not respond")
 			return None
 
+		# Local echo off
+		_ret = self.wifi.sendCommand("ATE0", "OK\r\n")
+		if (_ret is None):
+			print("ATE0 esp8266 not respond")
+			return None
+
+		# Set DNS Server Information
 		_ret = self.wifi.setDNS(DNS_SERVER1, DNS_SERVER2)
 		if (self.debug): print("_ret=[{}]".format(_ret))
 
+		# Set the time zone and SNTP server
 		_command = 'AT+CIPSNTPCFG=1,{},\"{}\"'.format(timezone, host)
 		if (self.debug): print("_command=[{}]".format(_command))
 		_ret = self.wifi.sendCommand(_command, "OK\r\n")
@@ -36,19 +44,10 @@ class sntpClient:
 		if _ret is None:
 			print("{} not respond".format(host))
 			return False
-		_ret = _ret.replace('\r\n', ' ')
-		_ret = _ret.replace('OK', '')
-		_ret = _ret.replace('"', '')
-		_ret = _ret.rstrip()
+		_ret = _ret.replace('\r\n', '')
+		_ret = _ret.replace(' ', '')
 		if (self.debug): print("_ret=[{}]".format(_ret))
-		_ret = _ret.split(",")
-		if (self.debug): print("_ret=[{}]".format(_ret))
-		if (_ret[1] != "{}".format(timezone)):
-			print("{} retuned {}".format(host, _ret[1]))
-			return False
-		if (_ret[2] != "{}".format(host)):
-			print("{} retuned {}".format(host, _ret[2]))
-			return False
+		if (_ret != "OK"): return False
 		
 		return True
 

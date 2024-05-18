@@ -47,7 +47,7 @@ class esp8266:
 		#if (self.debug): print("_return={}".format(_return))
 		return _return
 
-	def sendData(self, data, size, host, port):
+	def sendData(self, data, size, host, port, encode=True):
 		if (host is not None):
 			_command = "AT+CIPSEND={},\"{}\",{}".format(size, host, port)
 		else:
@@ -92,7 +92,10 @@ class esp8266:
 			if (ch == ">"): break
 
 		for _i in range(size):
-			self.ser.write(str.encode(data[_i]))
+			if (encode):
+				self.ser.write(str.encode(data[_i]))
+			else:
+				self.ser.write(data[_i])
 
 		_wait = list("SEND OK\r\n")
 		_waitlen = len(_wait) * -1
@@ -206,17 +209,14 @@ class esp8266:
 	def getMacInfo(self):
 		_ret = self.sendCommand("AT+CIFSR", "OK\r\n")
 		if (self.debug): print("_ret=[{}]".format(_ret))
-		_ret = _ret.replace('\r\n', ' ')
-		if (self.debug): print("_ret=[{}]".format(_ret))
+		_ret = _ret.replace('\r\n', '')
+		_ret = _ret.replace('OK', '')
 		_ret = _ret.replace('"', '')
+		_ret = _ret.replace(' ', '')
 		if (self.debug): print("_ret=[{}]".format(_ret))
-		_ret = _ret.split(' ')
-
+		_ret = _ret.split(',')
+		if (self.debug): print("_ret=[{}]".format(_ret))
 		_mac = _ret[2]
-		if (self.debug): print("_mac=[{}]".format(_mac))
-		_mac = _mac.split(',')
-		_mac = _mac[1]
-		if (self.debug): print("_mac=[{}]".format(_mac))
 		return _mac
 
 	def setDNS(self, dns1, dns2=None, dns3=None):

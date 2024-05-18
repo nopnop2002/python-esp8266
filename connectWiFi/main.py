@@ -19,14 +19,16 @@ if __name__=="__main__":
 
 	wifi = esp8266(args.device, args.speed, args.timeout, args.debug)
 
-	ret = wifi.sendCommand("ATE0", "OK\r\n")
-	if (ret is None): 
-		print("ATE0 esp8266 not respond")
-		sys.exit()
-
+	# Reset module
 	ret = wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
 	if (ret is None): 
 		print("AT+RST esp8266 not respond")
+		sys.exit()
+
+	# Local echo off
+	ret = wifi.sendCommand("ATE0", "OK\r\n")
+	if (ret is None): 
+		print("ATE0 esp8266 not respond")
 		sys.exit()
 
 	ip = wifi.getIpInfo()
@@ -34,4 +36,3 @@ if __name__=="__main__":
 
 	mac = wifi.getMacInfo()
 	print("mac={}".format(mac))
-
