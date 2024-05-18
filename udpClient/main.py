@@ -4,15 +4,15 @@ import sys
 import os
 import time
 import argparse
-from tcpClient import tcpClient
+from udpClient import udpClient
 
 if __name__=="__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--device', help="uart device file name", default='/dev/tty')
 	parser.add_argument('--speed', type=int, help="uart baudrate", default=115200)
 	parser.add_argument('--timeout', type=int, help="uart timeout", default=3)
-	parser.add_argument('--host', required=True, help="tcp host to connect to")
-	parser.add_argument('--port', required=True, type=int, help="tcp port to connect to")
+	parser.add_argument('--host', help="udp host to connect to", default="255.255.255.255")
+	parser.add_argument('--port', required=True, type=int, help="udp port to connect to")
 	parser.add_argument('--debug', action='store_true', help="enable debug print")
 	args = parser.parse_args()
 	print("device={}".format(args.device))
@@ -21,7 +21,7 @@ if __name__=="__main__":
 	print("host={}".format(args.host))
 	print("port={}".format(args.port))
 
-	client = tcpClient(args.device, args.speed, args.timeout, args.debug)
+	client = udpClient(args.device, args.speed, args.timeout, args.debug)
 
 	# Connect server
 	ret = client.connect(args.host, args.port)
@@ -41,7 +41,6 @@ if __name__=="__main__":
 		ret = client.receive()
 		print("client.receive = {}".format(ret))
 		time.sleep(1)
-
 
 	# Disconnect server
 	ret = client.disconnect()

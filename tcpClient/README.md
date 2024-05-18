@@ -5,7 +5,6 @@ git clone https://github.com/nopnop2002/python-esp8266
 cd python-esp8266/tcpClient
 
 sudo -E python3 main.py --help
-
 usage: main.py [-h] [--device DEVICE] [--speed SPEED] [--timeout TIMEOUT]
                --host HOST --port PORT [--debug]
 
