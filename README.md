@@ -14,9 +14,6 @@ ESP8266 module like ESP01
  You can download from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
  Some versions do not support 1M SoCs like ESP01.   
 
-- Flash download tool   
-See [here](https://github.com/nopnop2002/Arduino-ESPAT-TCP/tree/master/Flash_AT_firmware).   
-
 # Flash AT firmware to ESP01.   
 The 3.3V output of the UART-USB converter has too little current to be used.   
 Power is supplied using 5V from the UART-USB converter and 3.3V from the regulator.   
@@ -24,6 +21,8 @@ Power is supplied using 5V from the UART-USB converter and 3.3V from the regulat
 - GPIO0 must be connected to GND.   
 - CH_PD must be pulled up.   
 - RESET must be pulled up.   
+
+Click [here](https://github.com/nopnop2002/Arduino-ESPAT-TCP/tree/master/Flash_AT_firmware) for details.
 
 ![esp01-flash](https://user-images.githubusercontent.com/6020549/33159146-b8456238-d053-11e7-8202-a86cca2f8a3d.jpg)
 
