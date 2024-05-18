@@ -7,14 +7,13 @@ You need only pyserial library and ESP8266 module.
 I recently bought a LuxkFox Pico Mini board.   
 It's a very small Linux board.   
 buildroot linux works.   
-But there is no network.
+But there is no network.   
 So, I made it to use the network with this board.
 
 ![ProMini-1](https://github.com/nopnop2002/python-esp8266/assets/6020549/f822d021-d73b-46b0-9485-0b324dbce3e9)
 
 # Hardware requirements   
 ESP8266 module like ESP01   
-
 
 # Software requirements   
 - pysirail library   
