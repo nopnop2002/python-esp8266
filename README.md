@@ -199,8 +199,8 @@ Wired connection 2  ea035181-2f58-3f41-bf2b-89c5022bb4e0  ethernet  usb0
 Wired connection 1  5bfff474-56e9-3a46-81d7-3b3a7d5692d7  ethernet  enp4s0
 ```
 
-Assign a fixed IP address to usb0 interface using the nmcli command.
-The fixed IP address assigned to the Ubuntu/Debian side can be any as long as it is in the same segment as the RNDIS client board.
+Assign a fixed IP address to usb0 interface using the nmcli command.   
+The fixed IP address assigned to the Ubuntu/Debian side can be any as long as it is on the same segment as the RNDIS client board.   
 ```
 $ sudo nmcli connection down "Wired connection 2"
 $ sudo nmcli connection modify "Wired connection 2" ipv4.addresses "172.32.0.100/16"
