@@ -29,6 +29,8 @@ In your buildroot environment you can enable it with this.
  Some versions do not support 1M SoCs like ESP01.   
 
 - Terminal software such as CoolTerm   
+ I use TeraTrem.   
+ You can down load from [here](https://download.cnet.com/tera-term/3000-2094_4-75766675.html)
 
 # Flash AT firmware to ESP01.   
 The 3.3V output of the UART-USB converter has too little current to be used.   
