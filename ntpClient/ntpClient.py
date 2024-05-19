@@ -62,11 +62,9 @@ class ntpClient:
 		_packet[13] = 0x4E;
 		_packet[14] = 49;
 		_packet[15] = 52;
-		__packet = str(_packet)
-		if (self.debug): print("__packet={}".format(_packet))
-		if (self.debug): print("len(__packet)={}".format(len(_packet)))
-		if (self.debug): print("type(__packet)={}".format(type(_packet)))
-		_ret = self.wifi.sendData(__packet, 48, self.host, 123)
+		#__packet = str(_packet)
+		#_ret = self.wifi.sendData(__packet, 48, self.host, 123)
+		_ret = self.wifi.sendData(_packet, 48, self.host, 123, True)
 		if (self.debug): print("_ret=[{}]".format(_ret))
 		if (_ret == "OK"): return True
 		return False
