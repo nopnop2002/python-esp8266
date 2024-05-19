@@ -79,6 +79,9 @@ class esp8266:
 			if (self.debug): print("_last={}".format(_last))
 			if (_wait == _last): break
 
+		_wait = list("> ")
+		_waitlen = len(_wait) * -1
+		_received = []
 		while True:
 			ch = self.ser.read()
 			if (self.debug): print("ch={} {}".format(len(ch), ch))
@@ -89,7 +92,13 @@ class esp8266:
 				ch = ch.decode('utf-8')
 			except:
 				continue
-			if (ch == ">"): break
+			_received.append(ch)
+			if (self.debug): print("_recieved={}".format(_received))
+			_last = _received[_waitlen:]
+			if (self.debug): print("_wait={}".format(_wait))
+			if (self.debug): print("_last={}".format(_last))
+			if (_wait == _last): break
+			#if (ch == ">"): break
 
 		for _i in range(size):
 			self.ser.write(str.encode(data[_i]))
@@ -117,6 +126,10 @@ class esp8266:
 		return "OK"
 
 	def receiveData(self, decode=True):
+		"""
+		IPD,{size}:{data}
+		IPD,10:1234567890
+		"""
 		_wait = list("IPD,")
 		_waitlen = len(_wait) * -1
 		_received = []
@@ -174,6 +187,33 @@ class esp8266:
 		else:
 			_return = _received
 		if (self.debug): print("_return={}".format(_return))
+		return _return
+
+	def waitData(self, wait):
+		_wait = list(wait)
+		_waitlen = len(_wait) * -1
+		if (self.debug): print("_wait={}".format(_wait))
+		_received = []
+		while True:
+			ch = self.ser.read()
+			if (self.debug): print("ch={} {}".format(len(ch), ch))
+			if (len(ch) == 0): 
+				print("sendCommand: timeout")
+				return None
+			try:
+				ch = ch.decode('utf-8')
+			except:
+				continue
+			_received.append(ch)
+			if (self.debug): print("_recieved={}".format(_received))
+			_last = _received[_waitlen:]
+			if (self.debug): print("_wait={}".format(_wait))
+			if (self.debug): print("_last={}".format(_last))
+			if (_wait == _last): break
+
+		self.ser.flushInput()
+		_return = "".join(_received)
+		#if (self.debug): print("_return={}".format(_return))
 		return _return
 
 	def getIpInfo(self):
