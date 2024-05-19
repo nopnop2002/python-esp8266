@@ -28,6 +28,8 @@ In your buildroot environment you can enable it with this.
  You can download from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
  Some versions do not support 1M SoCs like ESP01.   
 
+- Terminal software such as CoolTerm   
+
 # Flash AT firmware to ESP01.   
 The 3.3V output of the UART-USB converter has too little current to be used.   
 Power is supplied using 5V from the UART-USB converter and 3.3V from the regulator.   
