@@ -21,8 +21,8 @@ So, I made it to use the network with this board.
 
 # Software requirements   
 - pysirail library   
-In your buildroot environment you can enable it with this.   
-![buildroot-71](https://github.com/nopnop2002/python-esp8266/assets/6020549/2b3be767-83e3-4d4c-8d28-93303196fca2)
+ In your buildroot environment you can enable it with this.   
+ ![buildroot-71](https://github.com/nopnop2002/python-esp8266/assets/6020549/2b3be767-83e3-4d4c-8d28-93303196fca2)
 
 - ESP8266 AT Firmware   
  You can download from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
@@ -30,7 +30,7 @@ In your buildroot environment you can enable it with this.
 
 - Terminal software such as CoolTerm   
  I use TeraTrem.   
- You can down load from [here](https://download.cnet.com/tera-term/3000-2094_4-75766675.html)
+ You can down load from [here](https://download.cnet.com/tera-term/3000-2094_4-75766675.html).
 
 # Flash AT firmware to ESP01.   
 The 3.3V output of the UART-USB converter has too little current to be used.   
