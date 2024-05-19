@@ -15,6 +15,9 @@ So, I made it to use the network with this board.
 ![ProMini-41](https://github.com/nopnop2002/python-esp8266/assets/6020549/6fdd800d-ccd4-47f2-8fa4-b972f2bb4510)
 
 # Hardware requirements   
+
+- Linux board with UART functionality
+
 - ESP8266 module like ESP01   
 
 - UART-USB converter
