@@ -27,7 +27,7 @@ if __name__=="__main__":
 	ret = client.connect(args.host, args.timezone)
 	print("client.connect = {}".format(ret))
 	if (ret is False):
-		sys.exit()
+		sys.exit(1)
 
 	for loop in range(10):
 		# Send packet
@@ -39,3 +39,5 @@ if __name__=="__main__":
 		print("client.receivePacket = {}".format(ret))
 		if (ret is not None): break
 		time.sleep(5)
+
+	sys.exit(0)

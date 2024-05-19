@@ -33,14 +33,15 @@ if __name__=="__main__":
 	ret = client.connect(args.host, args.port, args.qos)
 	print("client.connect = {}".format(ret))
 	if (ret is False):
-		sys.exit()
+		sys.exit(1)
 
 	# Publish tipicr
 	ret = client.publish(args.topic, args.payload)
-	print("client.send = {}".format(ret))
+	print("client.publish = {}".format(ret))
 	if (ret is False):
-		sys.exit()
+		sys.exit(2)
 
 	# Disconnect server
 	ret = client.disconnect()
 	print("client.disconnect = {}".format(ret))
+	sys.exit(0)

@@ -27,7 +27,7 @@ if __name__=="__main__":
 	ret = client.connect(args.host, args.port)
 	print("client.connect = {}".format(ret))
 	if (ret is False):
-		sys.exit()
+		sys.exit(1)
 
 	for loop in range(10):
 		# Send data to server
@@ -35,7 +35,7 @@ if __name__=="__main__":
 		ret = client.send(data, len(data))
 		print("client.send = {}".format(ret))
 		if (ret is False):
-			sys.exit()
+			sys.exit(2)
 
 		# Recive data from server
 		ret = client.receive()
@@ -45,3 +45,4 @@ if __name__=="__main__":
 	# Disconnect server
 	ret = client.disconnect()
 	print("client.disconnect = {}".format(ret))
+	sys.exit(0)

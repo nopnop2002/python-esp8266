@@ -23,16 +23,17 @@ if __name__=="__main__":
 	ret = wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
 	if (ret is None): 
 		print("AT+RST esp8266 not respond")
-		sys.exit()
+		sys.exit(1)
 
 	# Local echo off
 	ret = wifi.sendCommand("ATE0", "OK\r\n")
 	if (ret is None): 
 		print("ATE0 esp8266 not respond")
-		sys.exit()
+		sys.exit(2)
 
 	ip = wifi.getIpInfo()
 	print("ip={}".format(ip))
 
 	mac = wifi.getMacInfo()
 	print("mac={}".format(mac))
+	sys.exit(0)

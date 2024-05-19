@@ -26,9 +26,10 @@ if __name__=="__main__":
 	ret = client.connect(args.host, args.timezone)
 	print("client.connect = {}".format(ret))
 	if (ret is False):
-		sys.exit()
+		sys.exit(1)
 
 	# Get time from server
 	datetime = client.getTime()
 	print("datetime is [{}]".format(datetime))
+	sys.exit(0)
 
