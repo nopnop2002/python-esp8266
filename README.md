@@ -16,7 +16,7 @@ So, I made it to use the network with this board.
 
 # Hardware requirements   
 
-- Linux board with UART functionality
+- Linux board with UART functionality   
 
 - ESP8266 module like ESP01   
 
