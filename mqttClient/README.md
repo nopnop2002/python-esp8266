@@ -95,7 +95,7 @@ mosquitto_sub -v -h broker.emqx.io -p 1883  -t "/topic/esp8266"
 /topic/esp8266 test
 ```
 
-# MQTT Publish using mosquitto_sub
+# MQTT Publish using mosquitto_pub
 ```
 sudo apt install mosquitto-clients
 mosquitto_pub -h broker.emqx.io -p 1883 -t "/topic/pyserial" -m "hogehoge"
