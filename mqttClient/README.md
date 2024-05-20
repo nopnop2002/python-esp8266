@@ -1,5 +1,7 @@
 # mqttClient
 
+Unfortunately, since it is a UART communication, MQTT Pub and Sub cannot work at the same time.   
+
 # Publish
 ```
 git clone https://github.com/nopnop2002/python-esp8266
