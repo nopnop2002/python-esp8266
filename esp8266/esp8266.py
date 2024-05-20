@@ -111,7 +111,7 @@ class esp8266:
 				if (self.debug): print("{}={}".format(_i, data[_i].to_bytes(1, 'little')))
 				self.ser.write(data[_i].to_bytes(1, 'little'))
 			else:
-				if (self.debug): print("{}={}".format(str.encode(data[_i])))
+				if (self.debug): print("{}={}".format(_i, str.encode(data[_i])))
 				self.ser.write(str.encode(data[_i]))
 
 		_wait = list("SEND OK\r\n")
