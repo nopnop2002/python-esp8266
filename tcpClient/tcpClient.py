@@ -17,11 +17,15 @@ class tcpClient:
 		self.host = host
 		self.port = port
 
+		# Get AP info
+		_ret = self.wifi.getApInfo()
+
 		# Reset module
-		_ret = self.wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
 		if (_ret is None):
-			print("AT+RST esp8266 not respond")
-			return None
+			_ret = self.wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
+			if (_ret is None):
+				print("AT+RST esp8266 not respond")
+				return None
 
 		# Local echo off
 		_ret = self.wifi.sendCommand("ATE0", "OK\r\n")
