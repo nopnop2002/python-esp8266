@@ -1,5 +1,5 @@
 # python-esp8266   
-Network example using esp8266 AT firmware.   
+Network example using pyseral and esp8266 AT firmware.   
 You don't need Ethernet card.   
 You need only pyserial library and ESP8266 module.   
 
