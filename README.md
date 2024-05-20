@@ -28,8 +28,20 @@ So, I made it to use the network with this board.
  ![buildroot-71](https://github.com/nopnop2002/python-esp8266/assets/6020549/2b3be767-83e3-4d4c-8d28-93303196fca2)
 
 - ESP8266 AT Firmware   
- You can download from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
+ AT firmware version can be identified by AT version and SDK version.   
+ AT version V2 or later does not support 1M FLASH.   
+ When using 1M FLASH like ESP01, it is necessary to use AT version 1.   
+ This repository works with both V1 and V2.   
+ You can download AT version 1 from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
  Some versions do not support 1M SoCs like ESP01.   
+ I used this.
+```
+AT+GMR
+AT version:1.7.5.0(Oct 20 2021 19:14:04)
+SDK version:3.0.5(b29dcd3)
+compile time:Oct 20 2021 20:13:50
+Bin version(Wroom 02):1.7.5
+```
 
 - Terminal software such as CoolTerm   
  I use TeraTrem.   
