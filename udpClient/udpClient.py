@@ -17,11 +17,15 @@ class udpClient:
 		self.host = host
 		self.port = port
 
+		# Get AP info
+		_ret = self.wifi.getApInfo()
+
 		# Reset module
-		ret = self.wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
-		if (ret is None):
-			print("AT+RST esp8266 not respond")
-			return None
+		if (_ret is None):
+			ret = self.wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
+			if (ret is None):
+				print("AT+RST esp8266 not respond")
+				return None
 
 		# Local echo off
 		ret = self.wifi.sendCommand("ATE0", "OK\r\n")
