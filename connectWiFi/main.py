@@ -19,11 +19,19 @@ if __name__=="__main__":
 
 	wifi = esp8266(args.device, args.speed, args.timeout, args.debug)
 
-	# Reset module
-	ret = wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
-	if (ret is None): 
-		print("AT+RST esp8266 not respond")
-		sys.exit(1)
+	# Disconnect AP
+	#ret = wifi.sendCommand("AT+CWQAP", "OK\r\n")
+
+	# Get AP info
+	ret = wifi.getApInfo()
+	print("getApInfo={}".format(ret))
+
+	if (ret is None):
+		# Reset module
+		ret = wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
+		if (ret is None): 
+			print("AT+RST esp8266 not respond")
+			sys.exit(1)
 
 	# Local echo off
 	ret = wifi.sendCommand("ATE0", "OK\r\n")
