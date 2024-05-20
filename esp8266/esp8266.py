@@ -130,12 +130,12 @@ class esp8266:
 
 		return "OK"
 
-	def receiveData(self, decode=True):
+	def receiveData(self, binary=False):
 		"""
 		IPD,{size}:{data}
 		IPD,10:1234567890
 		"""
-		_wait = list("IPD,")
+		_wait = list("+IPD,")
 		_waitlen = len(_wait) * -1
 		_received = []
 		while True:
@@ -182,15 +182,15 @@ class esp8266:
 			if (len(ch) == 0): 
 				print("sendCommand: timeout")
 				return None
-			if (decode):
+			if (binary is False):
 				ch = ch.decode('utf-8')
 			_received.append(ch)
 			if (self.debug): print("_recieved={}".format(_received))
 
-		if (decode):
-			_return = "".join(_received)
-		else:
+		if (binary):
 			_return = _received
+		else:
+			_return = "".join(_received)
 		if (self.debug): print("_return={}".format(_return))
 		return _return
 
@@ -220,6 +220,41 @@ class esp8266:
 		_return = "".join(_received)
 		#if (self.debug): print("_return={}".format(_return))
 		return _return
+
+	def isWaiting(self):
+		return self.ser.in_waiting
+
+	def readRawData(self):
+		_received = []
+		while True:
+			ch = self.ser.read()
+			if (self.debug): print("ch={} {}".format(len(ch), ch))
+			if (len(ch) == 0): 
+				return _received
+			try:
+				ch = ch.decode('utf-8')
+			except:
+				continue
+			_received.append(ch)
+			if (self.debug): print("_recieved={}".format(_received))
+
+	def getApInfo(self):
+		_ret = self.sendCommand("AT+CWJAP?", "OK\r\n")
+		if (self.debug): print("_ret=[{}]".format(_ret))
+		if (_ret is None): return _ret
+
+		_ret = _ret.replace('\r\n', ' ')
+		if (self.debug): print("_ret=[{}]".format(_ret))
+		_ret = _ret.replace('"', '')
+		if (self.debug): print("_ret=[{}]".format(_ret))
+		_ret = _ret.replace('OK', '')
+		if (self.debug): print("_ret=[{}]".format(_ret))
+		_ret = _ret.replace(' ', '')
+		if (self.debug): print("_ret=[{}]".format(_ret))
+		if (_ret[0:4] == "NoAP"): return None
+		_ret = _ret.split(':')
+		if (self.debug): print("_ret=[{}]".format(_ret))
+		return _ret[1]
 
 	def getIpInfo(self):
 		_ret = self.sendCommand("AT+CIPSTA?", "OK\r\n")
