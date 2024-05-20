@@ -132,8 +132,9 @@ class esp8266:
 
 	def receiveData(self, binary=False):
 		"""
-		IPD,{size}:{data}
-		IPD,10:1234567890
+		Receiving undefined length data
+		+IPD,{size}:{data}
+		+IPD,10:1234567890
 		"""
 		_wait = list("+IPD,")
 		_waitlen = len(_wait) * -1
@@ -194,7 +195,12 @@ class esp8266:
 		if (self.debug): print("_return={}".format(_return))
 		return _return
 
-	def waitData(self, wait):
+	def waitData(self, wait, binary=False):
+		"""
+		Receiving fixed length data
+		+IPD,{size}:{wait}
+		+IPD,10:1234567890
+		"""
 		_wait = list(wait)
 		_waitlen = len(_wait) * -1
 		if (self.debug): print("_wait={}".format(_wait))
@@ -217,7 +223,10 @@ class esp8266:
 			if (_wait == _last): break
 
 		self.ser.flushInput()
-		_return = "".join(_received)
+		if (binary):
+			_return = _received
+		else:
+			_return = "".join(_received)
 		#if (self.debug): print("_return={}".format(_return))
 		return _return
 
