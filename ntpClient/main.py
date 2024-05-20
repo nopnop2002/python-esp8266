@@ -40,4 +40,8 @@ if __name__=="__main__":
 		if (ret is not None): break
 		time.sleep(5)
 
+	ret = client.disconnect()
+	print("client.disconnect = {}".format(ret))
+	if (ret is False):
+		sys.exit(2)
 	sys.exit(0)

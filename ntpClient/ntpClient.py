@@ -22,11 +22,17 @@ class ntpClient:
 		self.host = host
 		self.timezone = timezone
 
-		_ret = self.wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
-		if (_ret is None):
-			print("AT+RST esp8266 not respond")
-			return None
+		# Get AP info
+		_ret = self.wifi.getApInfo()
 
+		# Reset module
+		if (_ret is None):
+			_ret = self.wifi.sendCommand("AT+RST", "WIFI GOT IP\r\n")
+			if (_ret is None):
+				print("AT+RST esp8266 not respond")
+				return None
+
+		# Local echo off
 		_ret = self.wifi.sendCommand("ATE0", "OK\r\n")
 		if (_ret is None):
 			print("ATE0 esp8266 not respond")
@@ -52,6 +58,12 @@ class ntpClient:
 
 		return True
 
+	def disconnect(self):
+		_ret = self.wifi.sendCommand("AT+CIPCLOSE", "OK\r\n")
+		if (self.debug): print("_ret=[{}]".format(_ret))
+		if (_ret is None): return False
+		return True
+
 	def sendPacket(self):
 		_packet = [0] * 48
 		_packet[0] = 0b11100011;   # LI, Version, Mode
@@ -70,7 +82,7 @@ class ntpClient:
 		return False
 
 	def receivePacket(self):
-		_ret = self.wifi.receiveData(False)
+		_ret = self.wifi.receiveData(binary=True)
 		if (self.debug): print("len(_ret)={}".format(len(_ret)))
 		if (len(_ret) != 48): return None
 
