@@ -33,8 +33,8 @@ So, I made it to use the network with this board.
  However, AT version V2 does not support 1M SoCs like ESP01.   
  When using 1M SoCs like ESP01, it is necessary to use AT version V1.   
  This repository works with both V1 and V2.   
- __Note__   
  You can download AT version V1 from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
+ __Note__   
  Some versions do not support 1M SoCs like ESP01.   
  I used this.
 ```
