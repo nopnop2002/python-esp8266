@@ -29,10 +29,11 @@ So, I made it to use the network with this board.
 
 - ESP8266 AT Firmware   
  AT firmware version can be identified by AT version and SDK version.   
- AT version V2 or later does not support 1M FLASH.   
- When using 1M FLASH like ESP01, it is necessary to use AT version V1.   
+ AT version V2 added MQTT and HTTP commands.   
+ However, AT version V2 does not support 1M SoCs like ESP01.   
+ When using 1M SoCs like ESP01, it is necessary to use AT version V1.   
  This repository works with both V1 and V2.   
- You can download AT version 1 from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
+ You can download AT version V1 from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
  Some versions do not support 1M SoCs like ESP01.   
  I used this.
 ```
