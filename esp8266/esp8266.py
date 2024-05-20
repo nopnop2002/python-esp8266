@@ -15,6 +15,9 @@ class esp8266:
 		self.ser = serial.Serial(device, speed, timeout=timeout)
 
 	def sendCommand(self, command, wait):
+		"""
+		Send AT command and wait responce
+		"""
 		if (self.debug): print("command=[{}]".format(command))
 		_command = command + "\r\n"
 		self.ser.flushInput()
@@ -48,6 +51,9 @@ class esp8266:
 		return _return
 
 	def sendData(self, data, size, host, port, binary=False):
+		"""
+		Send data to host and port
+		"""
 		if (host is not None):
 			_command = "AT+CIPSEND={},\"{}\",{}".format(size, host, port)
 		else:
@@ -198,7 +204,7 @@ class esp8266:
 	def waitData(self, wait, binary=False):
 		"""
 		Receiving fixed length data
-		+IPD,{size}:{wait}
+		+IPD,{size_of_wait}:{wait}
 		+IPD,10:1234567890
 		"""
 		_wait = list(wait)
@@ -231,21 +237,34 @@ class esp8266:
 		return _return
 
 	def isWaiting(self):
+		"""
+		Returns the size of the data arrived at the objects internal buffer
+		"""
 		return self.ser.in_waiting
 
-	def readRawData(self):
+	def readData(self, length, binary=False):
+		"""
+		Receive data for length
+		"""
 		_received = []
 		while True:
 			ch = self.ser.read()
 			if (self.debug): print("ch={} {}".format(len(ch), ch))
 			if (len(ch) == 0): 
-				return _received
+				return []
 			try:
 				ch = ch.decode('utf-8')
 			except:
 				continue
 			_received.append(ch)
 			if (self.debug): print("_recieved={}".format(_received))
+			if (len(_received) == length): break
+
+		if (binary):
+			_return = _received
+		else:
+			_return = "".join(_received)
+		return _return
 
 	def getApInfo(self):
 		_ret = self.sendCommand("AT+CWJAP?", "OK\r\n")
