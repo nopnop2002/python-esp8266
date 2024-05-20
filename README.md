@@ -17,6 +17,7 @@ So, I made it to use the network with this board.
 # Hardware requirements   
 
 - Linux board with UART functionality   
+ As long as pyserial works, distribution doesn't matter.   
 
 - ESP8266 module like ESP01   
 
