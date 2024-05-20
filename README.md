@@ -35,7 +35,7 @@ So, I made it to use the network with this board.
  This repository works with both V1 and V2.   
  You can download AT version V1 from [here](https://github.com/espressif/ESP8266_NONOS_SDK/tags).   
  __Note__   
- Some versions do not support 1M SoCs like ESP01.   
+ Some firmware here does not support 1M SoC such as ESP01.   
  I used this.
 ```
 AT+GMR
