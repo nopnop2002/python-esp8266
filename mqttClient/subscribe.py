@@ -46,18 +46,20 @@ if __name__=="__main__":
 	if (ret is False):
 		sys.exit(1)
 
-	# Subscribe tipicr
+	# Subscribe topic
 	ret = client.subscribe(args.topic)
 	print("client.subscribe = {}".format(ret))
 	if (ret is False):
 		sys.exit(2)
 
 	while running:
+		# Receive topics
 		ret = client.update()
 		#print("client.update = {} {}".format(ret, type(ret)))
 		if (ret is False):
 			sys.exit(3)
 
+		# Retrieve received topics
 		received = client.subscribed()
 		#print("client.subscribed = {}".format(received))
 		if (received is not None):
