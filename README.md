@@ -306,8 +306,14 @@ mac=5c:cf:7f:6b:00:1b
 # UART to WiFi module   
 We can get a module for UART communication.   
 We can write AT firmware to this.   
+It has a 5V->3.3V regulator and can supply power directly from 5V.   
 Although it supplies 5V power, the TTL level of UART is 3.3V.   
 ![ESP-UART-MODULE-1](https://user-images.githubusercontent.com/6020549/104827197-b504cd80-589e-11eb-95a8-f12c75670ced.JPG)
 
 ![ESP-UART-MODULE-2](https://user-images.githubusercontent.com/6020549/104827200-b8985480-589e-11eb-9a01-e70d4fbd55cc.JPG)
 
+# ESP01 Adapter board
+Only $1 for aliexpress/eBay.   
+It has a 5V->3.3V regulator and can supply power directly from 5V.   
+Although it supplies 5V power, the TTL level of UART is 3.3V.   
+![ESP01-Adapter-3](https://user-images.githubusercontent.com/6020549/120063987-f3a86100-c0a4-11eb-95e4-c87164812af4.JPG)
