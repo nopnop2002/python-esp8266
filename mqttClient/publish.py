@@ -35,7 +35,7 @@ if __name__=="__main__":
 	if (ret is False):
 		sys.exit(1)
 
-	# Publish tipicr
+	# Publish topic
 	ret = client.publish(args.topic, args.payload)
 	print("client.publish = {}".format(ret))
 	if (ret is False):
