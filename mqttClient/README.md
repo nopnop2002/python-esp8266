@@ -93,8 +93,7 @@ client.disconnect = True
 # MQTT Subscribe using mosquitto_sub
 ```
 sudo apt install mosquitto-clients
-mosquitto_sub -v -h broker.emqx.io -p 1883  -t "/topic/esp8266"
-/topic/esp8266 test
+mosquitto_sub -v -h broker.emqx.io -p 1883  -t "/topic/pyserial"
 ```
 
 # MQTT Publish using mosquitto_pub
