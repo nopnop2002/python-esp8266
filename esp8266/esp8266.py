@@ -149,7 +149,7 @@ class esp8266:
 			ch = self.ser.read()
 			if (self.debug): print("ch={} {}".format(len(ch), ch))
 			if (len(ch) == 0): 
-				print("sendCommand: timeout")
+				print("receiveData: timeout")
 				return None
 			try:
 				ch = ch.decode('utf-8')
@@ -167,7 +167,7 @@ class esp8266:
 			ch = self.ser.read()
 			if (self.debug): print("ch={} {}".format(len(ch), ch))
 			if (len(ch) == 0): 
-				print("sendCommand: timeout")
+				print("receiveData: timeout")
 				return None
 			try:
 				ch = ch.decode('utf-8')
@@ -187,7 +187,7 @@ class esp8266:
 			ch = self.ser.read()
 			if (self.debug): print("ch={} {}".format(len(ch), ch))
 			if (len(ch) == 0): 
-				print("sendCommand: timeout")
+				print("receiveData: timeout")
 				return None
 			if (binary is False):
 				ch = ch.decode('utf-8')
@@ -215,7 +215,7 @@ class esp8266:
 			ch = self.ser.read()
 			if (self.debug): print("ch={} {}".format(len(ch), ch))
 			if (len(ch) == 0): 
-				print("sendCommand: timeout")
+				print("waitData: timeout")
 				return None
 			try:
 				ch = ch.decode('utf-8')
