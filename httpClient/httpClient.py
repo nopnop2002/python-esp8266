@@ -56,8 +56,11 @@ class httpClient:
 		_ret = self.wifi.sendCommand("AT+CIPCLOSE", "OK\r\n")
 		if (self.debug): print("sendCommand _ret=[{}]".format(_ret))
 		if (_ret is None): return False
-		_ret = _ret.replace("OK", "")
-		_ret = _ret.replace("\r\n", "")
+
+		_ret = _ret.replace('\r\n', '')
+		_ret = _ret.replace('OK', '')
+		_ret = _ret.replace(' ', '')
+		if (self.debug): print("AT+CIPCLOSE _ret=[{}]".format(_ret))
 		if (_ret != "CLOSED"): return False
 		return True
 
