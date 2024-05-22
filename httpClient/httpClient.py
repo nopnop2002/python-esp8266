@@ -126,7 +126,7 @@ class httpClient:
 		_data = _data + "\r\n"
 		_data = _data + json
 		_ret = self.wifi.sendData(_data, len(_data), None, 0)
-		if (self.debug): print("_ret=[{}]".format(_ret))
+		if (self.debug): print("sendData _ret=[{}]".format(_ret))
 		if (_ret is False): return False
 
 		# Receive packet
@@ -161,7 +161,7 @@ class httpClient:
 		_data = _data + "\r\n"
 		_data = _data + json
 		_ret = self.wifi.sendData(_data, len(_data), None, 0)
-		if (self.debug): print("_ret=[{}]".format(_ret))
+		if (self.debug): print("sendData _ret=[{}]".format(_ret))
 		if (_ret is False): return False
 
 		# Receive packet
