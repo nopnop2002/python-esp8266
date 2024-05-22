@@ -20,7 +20,7 @@ So, I made it to use the network with this board.
  As long as pyserial works, distribution doesn't matter.   
 
 - ESP8266 module like ESP01   
- ESP8266 has 1MB FLASH and 4MB FLASH (or more) SoCs, but it doesn't matter.
+ ESP8266 has SoCs with 1MB Flash (like ESP01) and 4MB Flash (like ESP12), it doesn't matter.
 
 - UART-USB converter
 
