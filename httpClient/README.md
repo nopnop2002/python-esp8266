@@ -23,7 +23,7 @@ sudo npm install -g json-server@0.17.4
 
 # Start json-server (Fake REST Server)
 If the host parameter is not specified, it can only be accessed from local host.   
-When accessing from ESP32, host parameter is required.   
+The host parameter is required when accessing from an external.   
 ```
 json-server --watch --host {My_IP_Address} db.json
 ```
