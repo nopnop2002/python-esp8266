@@ -114,7 +114,6 @@ class httpClient:
 		# Establish TCP transmission
 		_ret = self.connectServer()
 		if (self.debug): print("connectServer _ret={}".format(_ret))
-		print("connectServer _ret={}".format(_ret))
 		if (_ret is False): return False
 
 		# Send packet
@@ -128,7 +127,6 @@ class httpClient:
 		_data = _data + json
 		_ret = self.wifi.sendData(_data, len(_data), None, 0)
 		if (self.debug): print("_ret=[{}]".format(_ret))
-		print("sendData _ret=[{}]".format(_ret))
 		if (_ret is False): return False
 
 		# Receive packet
@@ -140,7 +138,6 @@ class httpClient:
 		# Close TCP connection
 		_ret = self.closeServer()
 		if (self.debug): print("closeServer _ret={}".format(_ret))
-		print("closeServer _ret={}".format(_ret))
 		if (_ret is False): return False
 
 		return True
