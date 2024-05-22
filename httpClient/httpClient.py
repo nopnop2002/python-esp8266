@@ -228,8 +228,3 @@ class httpClient:
 		else:
 			return [False, _header, None]
 
-	def disconnect(self):
-		_ret = self.wifi.sendCommand("AT+CIPCLOSE", "OK\r\n")
-		if (self.debug): print("_ret=[{}]".format(_ret))
-		if (_ret is None): return False
-		return True
