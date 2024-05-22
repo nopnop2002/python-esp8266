@@ -1,5 +1,6 @@
-# hhtpClient(restClient)
+# httpClient(REST Client)
 This example uses [this](https://github.com/typicode/json-server) for the http server.   
+If you use a server other than json-server, you will need to change the POST and PUT JSON data.   
 
 # Install json-server (Fake REST Server) stable version on your host
 ```
@@ -31,7 +32,6 @@ json-server --watch --host {My_IP_Address} db.json
 
 
 # Start example
-If you use a server other than json-server, you will need to change the POST and PUT JSON data.   
 ```
 git clone https://github.com/nopnop2002/python-esp8266
 cd python-esp8266/httpClient
