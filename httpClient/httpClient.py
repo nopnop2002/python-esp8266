@@ -68,10 +68,10 @@ class httpClient:
 		_header = "{} /{} HTTP/1.1\r\nHost: {}:{}\r\nUser-Agent: esp8266/1.0.0\r\nAccept: */*\r\n".format(request, path, self.host, self.port)
 		return _header
 
-	def responceHeader(self):
+	def responseHeader(self):
 		return self.header
 
-	def responceBody(self):
+	def responseBody(self):
 		return self.body
 
 	def get(self, path):

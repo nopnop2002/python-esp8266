@@ -35,10 +35,10 @@ if __name__=="__main__":
 	ret = client.get(PATH)
 	print("client.get = {}".format(ret))
 	if (ret == False):
-		header = client.responceHeader()
+		header = client.responseHeader()
 		print("http error {}".format(header))
 		sys.exit(2)
-	body = client.responceBody()
+	body = client.responseBody()
 	print("{}".format(body))
 	print("Hit Enter key to Put new record")
 	sys.stdin.read(1)
@@ -47,20 +47,20 @@ if __name__=="__main__":
 	ret = client.post(PATH, "{\"title\":\"test\",\"auther\":\"nopnop2002\"}")
 	print("client.post = {}".format(ret))
 	if (ret == False):
-		header = client.responceHeader()
+		header = client.responseHeader()
 		print("http error {}".format(header))
 		sys.exit(3)
-	#body = client.responceBody()
+	#body = client.responseBody()
 	#print("{}".format(body))
 
 	# Request GET
 	ret = client.get(PATH)
 	print("client.get = {}".format(ret))
 	if (ret == False):
-		header = client.responceHeader()
+		header = client.responseHeader()
 		print("http error {}".format(header))
 		sys.exit(4)
-	body = client.responceBody()
+	body = client.responseBody()
 	print("{}".format(body))
 	print("Hit Enter key to modify record")
 	sys.stdin.read(1)
@@ -70,10 +70,10 @@ if __name__=="__main__":
 	ret = client.put(path, "{\"title\":\"test_update\",\"auther\":\"nopnop2002_update\"}")
 	print("client.put = {}".format(ret))
 	if (ret is False):
-		header = client.responceHeader()
+		header = client.responseHeader()
 		print("http error {}".format(header))
 		sys.exit(5)
-	body = client.responceBody()
+	body = client.responseBody()
 	print("{}".format(body))
 	print("Hit Enter key to delete record")
 	sys.stdin.read(1)
@@ -83,7 +83,7 @@ if __name__=="__main__":
 	ret = client.delete(path)
 	print("client.delete = {}".format(ret))
 	if (ret is False):
-		header = client.responceHeader()
+		header = client.responseHeader()
 		print("http error {}".format(header))
 		sys.exit(6)
 
@@ -91,9 +91,9 @@ if __name__=="__main__":
 	ret = client.get(PATH)
 	print("client.get = {}".format(ret))
 	if (ret == False):
-		header = client.responceHeader()
+		header = client.responseHeader()
 		print("http error {}".format(header))
 		sys.exit(7)
-	body = client.responceBody()
+	body = client.responseBody()
 	print("{}".format(body))
 
