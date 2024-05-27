@@ -109,6 +109,7 @@ client.get = True
 ```
 
 # Using curl
+You can do the same using curl.   
 ```
 # Set your host & port
 export HOST="192.168.10.41"
@@ -118,10 +119,10 @@ export PORT=3000
 curl http://${HOST}:${PORT}/sample
 
 # Put
-curl -H "Content-Type: application/json" -d '{"title":"test"}' -X POST http://${HOST}:${PORT}/posts
+curl -H "Content-Type: application/json" -d '{"title":"test", "auther":"nopnop2002"}' -X POST http://${HOST}:${PORT}/sample
 
 # Post
-curl -H "Content-Type: application/json" -d '{"title":"test update", "auther":"nopnop2003"}' -X PUT http://${HOST}:${PORT}0/sample/2
+curl -H "Content-Type: application/json" -d '{"title":"test update", "auther":"nopnop2002 update"}' -X PUT http://${HOST}:${PORT}/sample/2
 
 # Delete
 curl -H "Content-Type: application/json" -X DELETE http://${HOST}:${PORT}/sample/2
