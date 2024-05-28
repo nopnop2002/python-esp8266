@@ -181,6 +181,12 @@ OK
 
 (*1) It is necessary to be able to supply sufficient current.   
 
+### Know your UART device   
+```
+ls /dev/tty*
+/dev/tty  /dev/ttyFIQ0  /dev/ttyS3  /dev/ttyS4
+```
+
 
 ### For luckfox mini
 You can use /dev/ttyS3 and /dev/ttyS4.   
@@ -280,10 +286,6 @@ root@172.32.0.93's password:
 ```
 cd python-esp8266/connectWiFi
 
-# Know your UART device   
-ls /dev/tty*
-/dev/tty  /dev/ttyFIQ0  /dev/ttyS3  /dev/ttyS4
-
 # Root privileges are required on Ubuntu/Debian
 sudo -E python3 main.py --device /dev/ttyS3
 
@@ -297,10 +299,6 @@ mac=5c:cf:7f:6b:00:1b
 # How to use in buildroot environment   
 ```
 cd python-esp8266/connectWiFi
-
-# Know your UART device   
-ls /dev/tty*
-/dev/tty  /dev/ttyFIQ0  /dev/ttyS3  /dev/ttyS4
 
 # buildroot does not require root privileges
 python3 main.py --device /dev/ttyS3
