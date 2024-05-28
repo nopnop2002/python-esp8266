@@ -187,7 +187,6 @@ ls /dev/tty*
 /dev/tty  /dev/ttyFIQ0  /dev/ttyS3  /dev/ttyS4
 ```
 
-
 ### For luckfox mini buildroot   
 You can use /dev/ttyS3 and /dev/ttyS4.   
 /dev/ttyS3 is IO56(TX)/IO57(RX).   
