@@ -179,7 +179,13 @@ OK
 - ESP01(Gnd) - Gnd of host   
 - ESP01(3v3) - 3V3 of host(*1)   
 
-(*1) It is necessary to be able to supply sufficient current.
+(*1) It is necessary to be able to supply sufficient current.   
+
+
+### For luckfox mini
+You can use /dev/ttyS3 and /dev/ttyS4.   
+/dev/ttyS3 is IO56(TX)/IO57(RX).   
+/dev/ttyS4 is IO53(TX)/IO52(RX).   
 
 # Retrieving files from github   
 
