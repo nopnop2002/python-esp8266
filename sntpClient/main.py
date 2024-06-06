@@ -7,7 +7,7 @@ from sntpClient import sntpClient
 
 if __name__=="__main__":
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--device', help="uart device file name", default='/dev/tty')
+	parser.add_argument('--device', required=True, help="uart device file name")
 	parser.add_argument('--speed', type=int, help="uart baudrate", default=115200)
 	parser.add_argument('--timeout', type=int, help="uart timeout", default=3)
 	parser.add_argument('--host', help="time server", default="time.google.com")

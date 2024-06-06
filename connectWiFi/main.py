@@ -8,7 +8,7 @@ from esp8266.esp8266 import esp8266
 
 if __name__=="__main__":
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--device', help="uart device file name", default='/dev/tty')
+	parser.add_argument('--device', required=True, help="uart device file name")
 	parser.add_argument('--speed', type=int, help="uart baudrate", default=115200)
 	parser.add_argument('--timeout', type=int, help="uart timeout", default=3)
 	parser.add_argument('--debug', action='store_true', help="enable debug print")
