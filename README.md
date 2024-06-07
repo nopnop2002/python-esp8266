@@ -26,7 +26,7 @@ So, I made it to use the network with this board.
  Used for initial firmware settings.   
 
 # Software requirements   
-- pysirail library   
+- pyserial library   
  In your buildroot environment you can enable it with this.   
  ![buildroot-71](https://github.com/nopnop2002/python-esp8266/assets/6020549/2b3be767-83e3-4d4c-8d28-93303196fca2)
 
@@ -187,7 +187,7 @@ ls /dev/tty*
 /dev/tty  /dev/ttyFIQ0  /dev/ttyS3  /dev/ttyS4
 ```
 
-### For luckfox mini buildroot   
+### For LuckFox Pico buildroot   
 You can use /dev/ttyS3 and /dev/ttyS4.   
 /dev/ttyS3 is IO56(TX)/IO57(RX).   
 /dev/ttyS4 is IO53(TX)/IO52(RX).   
