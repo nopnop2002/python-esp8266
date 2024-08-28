@@ -22,6 +22,11 @@ So, I made it to use the network with this board.
 - ESP8266 module like ESP01   
  ESP8266 has SoCs with 1MB Flash (like ESP01) and 4MB Flash (like ESP12), it doesn't matter.
 
+- Regulator that can convert 5V to 3.3V   
+ I used AMS1117.   
+ ![AMS1117-1](https://github.com/user-attachments/assets/2e50876b-a39e-43bb-9c86-92ab9d18274a)
+ ![AMS1117-2](https://github.com/user-attachments/assets/e4b1f4c5-e88d-4eb5-b2bf-2012622a0859)
+
 - UART-USB converter   
  Used for initial firmware settings.   
 
