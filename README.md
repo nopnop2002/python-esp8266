@@ -315,7 +315,7 @@ ip=['192.168.10.108', '192.168.10.1', '192.168.10.1']
 mac=5c:cf:7f:6b:00:1b
 ```
 
-# UART to WiFi module   
+# UART communication dedicated module   
 We can get a module for UART communication.   
 We can write AT firmware to this.   
 It has a 5V->3.3V regulator and can supply power directly from 5V.   
